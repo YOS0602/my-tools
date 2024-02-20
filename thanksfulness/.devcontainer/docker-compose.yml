@@ -1,0 +1,14 @@
+# docker compose up -d で起動
+version: '3'
+services:
+  golang:
+    image: golang:1.22-bookworm
+    container_name: 'thanksfulness'
+    ports:
+      - 8080:80
+    volumes:
+      - type: bind
+        source: '..'
+        target: '/workspace/app'
+    tty: true
+    restart: always
