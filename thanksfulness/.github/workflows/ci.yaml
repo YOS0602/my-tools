@@ -1,0 +1,41 @@
+# This workflow will build a golang project
+# Original source: https://github.com/actions/starter-workflows/blob/main/ci/go.yml
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: CI Thanksfulness
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+    paths:
+      - 'thanksfulness/**'
+      - '!thanksfulness/docs/**'
+
+defaults:
+  run:
+    # See: https://ebc-2in2crc.hatenablog.jp/entry/2023/01/13/181801
+    working-directory: thanksfulness
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.22'
+          cache-dependency-path: 'go.sum'
+
+      - name: Build
+        run: go build -o thanksfulness
+
+      - name: Test
+        run: go test -v ./...
+
+      - name: Upload Go Built File
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-thanksfulness
+          path: thanksfulness
