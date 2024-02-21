@@ -10,6 +10,7 @@ on:
     paths:
       - 'thanksfulness/**'
       - '!thanksfulness/docs/**'
+  workflow_dispatch:
 
 defaults:
   run:
