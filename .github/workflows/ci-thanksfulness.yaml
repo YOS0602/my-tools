@@ -10,6 +10,9 @@ on:
     paths:
       - 'thanksfulness/**'
       - '!thanksfulness/docs/**'
+  push:
+    branches:
+      - 'main'
   workflow_dispatch:
 
 defaults:
@@ -23,12 +26,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Show pwd
-        run: pwd
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
           go-version: '1.22'
+          # TODO キャッシュがうまくできていない
+          # See https://tech.yappli.io/entry/setup-go-v4
           cache-dependency-path: ' ./go.sum'
 
       - name: Build
@@ -37,8 +40,9 @@ jobs:
       - name: Test
         run: go test -v ./...
 
-      - name: Upload Go Built File
-        uses: actions/upload-artifact@v4
-        with:
-          name: built-thanksfulness
-          path: ./thanksfulness
+      # - name: Upload Go Built File
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: built-thanksfulness
+      #     # TODO バイナリファイルだけuploadしたいのに、thanksfulness配下のファイル全てが対象となってしまう
+      #     path: ./thanksfulness
