@@ -2,7 +2,7 @@
 # Original source: https://github.com/actions/starter-workflows/blob/main/ci/go.yml
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
 
-name: CI Thanksfulness
+name: Thanksfulness CI
 
 on:
   pull_request:
