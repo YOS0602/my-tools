@@ -11,8 +11,9 @@ terraform {
 }
 
 provider "google" {
-  project = "my-project-nereid"
-  region  = "asia-northeast1"
+  project = var.project
+  region  = var.region
+  zone    = var.zone
   default_labels = {
     p_name = "thanksfulness"
   }
