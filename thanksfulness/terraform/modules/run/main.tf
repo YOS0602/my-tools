@@ -12,8 +12,7 @@ resource "google_cloud_run_v2_service" "default" {
       min_instance_count = 0
     }
     containers {
-      # FIXME ARのURLが判明したら書き換える
-      image = "us-docker.pkg.dev/cloudrun/container/hello"
+      image = var.image
       resources {
         limits = {
           cpu    = "1"
