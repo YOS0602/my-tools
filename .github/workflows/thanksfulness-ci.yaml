@@ -15,11 +15,6 @@ on:
       - 'main'
   workflow_dispatch:
 
-defaults:
-  run:
-    # See: https://ebc-2in2crc.hatenablog.jp/entry/2023/01/13/181801
-    working-directory: thanksfulness
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,12 +28,15 @@ jobs:
           # go-version-file: 'go.mod'
           # TODO キャッシュがうまくできていない
           # See https://tech.yappli.io/entry/setup-go-v4
-          # cache-dependency-path: 'go.sum'
+          cache-dependency-path: 'thanksfulness/go.sum'
 
       - name: Build
+        # See: https://ebc-2in2crc.hatenablog.jp/entry/2023/01/13/181801
+        working-directory: thanksfulness
         run: go build -o thanksfulness
 
       - name: Test
+        working-directory: thanksfulness
         run: go test -v ./...
 
       - name: Upload Go Built File
@@ -46,4 +44,4 @@ jobs:
         with:
           name: built-thanksfulness
           # TODO バイナリファイルだけuploadしたいのに、thanksfulness配下のファイル全てが対象となってしまう
-          path: ./thanksfulness
+          path: ./thanksfulness/thanksfulness
