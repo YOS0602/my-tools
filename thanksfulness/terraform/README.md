@@ -48,8 +48,9 @@ cd ./thanksfulness/terraform
 
 1. templateファイルをコピーする
     ```bash
-    cp ./thanksfulness-prd.tfvars.template ./thanksfulness-prd.tfvars
+    sh setup-tfvars.sh
     ```
+    ※既にtfvarsファイルが存在する場合は何もしない。
 2. 変数を定義する
     - オプショナル変数かどうかは、`variables.tf` を参照して判断すること
 
@@ -75,3 +76,10 @@ terraform destroy
 # 既存リソースをterraformに取り込む
 
 [Import - Configuration Language | Terraform | HashiCorp Developer](https://developer.hashicorp.com/terraform/language/import)
+
+# Provider を upgrade する
+
+[Lock and upgrade provider versions | Terraform | HashiCorp Developer](https://developer.hashicorp.com/terraform/tutorials/configuration-language/provider-versioning#upgrade-the-aws-provider-version)
+
+1. `terraform.tf` の `required_providers` ブロック内にある `version` を更新する
+2. `terraform init -upgrade` コマンドを実行する
