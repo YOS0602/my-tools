@@ -2,6 +2,7 @@ package notion_test
 
 import (
 	"my-tools/thanksfulness/notion"
+	"os"
 	"reflect"
 	"testing"
 	"time"
@@ -18,8 +19,12 @@ func toTime(dateTime string) time.Time {
 }
 
 func TestUnmarshalResponse(t *testing.T) {
+	t.Parallel()
 	// given
-	input := []byte(testJson)
+	input, err := os.ReadFile("./NotionAPIResponseTestData.json")
+	if err != nil {
+		t.Errorf("Error reading test data: %v", err)
+	}
 	// when
 	actual, error := notion.UnmarshalResponse(input)
 	// then
@@ -48,6 +53,27 @@ func TestUnmarshalResponse(t *testing.T) {
 					},
 				},
 			},
+			{
+				Object:         "block",
+				Id:             "10000000-0000-0000-0000-000011112222",
+				Parent:         notion.APIParent{Type: "block_id", BlockId: "00000001-0000-0000-0000-000011112222"},
+				CreatedTime:    toTime("2023-01-01T09:00:00.000Z"),
+				LastEditedTime: toTime("2024-02-01T03:00:00.000Z"),
+				CreatedBy:      notion.APIUser{Object: "user", Id: "10000000-1111-0000-0000-000011112222"},
+				LastEditedBy:   notion.APIUser{Object: "user", Id: "10000000-1111-0000-0000-000011112222"},
+				HasChildren:    false,
+				Archived:       false,
+				InTrash:        false,
+				Type:           "bulleted_list_item",
+				BulletedListItem: &notion.APIRichText{
+					RichText: []notion.APIPlainText{
+						{
+							Type:      "text",
+							PlainText: "感謝永遠に",
+						},
+					},
+				},
+			},
 		},
 		NextCursor: false, // nil はboolのゼロ値であるfalseにマッピングされる
 		HasMore:    false,
@@ -59,55 +85,3 @@ func TestUnmarshalResponse(t *testing.T) {
 		t.Errorf("Unexpected response: expected %v, got %v", expectedResponse, actual)
 	}
 }
-
-var testJson = `{
-  "object": "list",
-  "results": [
-    {
-      "object": "block",
-      "id": "00000000-0000-0000-0000-000011112222",
-      "parent": {
-        "type": "block_id",
-        "block_id": "00000001-0000-0000-0000-000011112222"
-      },
-      "created_time": "2023-01-01T09:00:00.000Z",
-      "last_edited_time": "2024-02-01T03:00:00.000Z",
-      "created_by": {
-        "object": "user",
-        "id": "10000000-1111-0000-0000-000011112222"
-      },
-      "last_edited_by": {
-        "object": "user",
-        "id": "10000000-1111-0000-0000-000011112222"
-      },
-      "has_children": false,
-      "archived": false,
-      "in_trash": false,
-      "type": "paragraph",
-      "paragraph": {
-        "rich_text": [
-          {
-            "type": "text",
-            "text": { "content": "2024/02/01", "link": null },
-            "annotations": {
-              "bold": false,
-              "italic": false,
-              "strikethrough": false,
-              "underline": false,
-              "code": false,
-              "color": "default"
-            },
-            "plain_text": "2024/02/01",
-            "href": null
-          }
-        ],
-        "color": "default"
-      }
-    }
-  ],
-  "next_cursor": null,
-  "has_more": false,
-  "type": "block",
-  "block": {},
-  "request_id": "30000000-0000-0000-0000-000011112222"
-}`

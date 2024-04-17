@@ -9,6 +9,7 @@ import (
 )
 
 func TestCry(t *testing.T) {
+	t.Parallel()
 	c1 := sample.NewCat("ニャーニャー")
 	assert.Equal(t, "ニャーニャー", c1.Cry())
 }
