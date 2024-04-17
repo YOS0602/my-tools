@@ -32,6 +32,7 @@ jobs:
       - name: Download Go modules
         shell: bash
         if: ${{ steps.setup-go.outputs.cache-hit != 'true' }}
+        working-directory: thanksfulness
         run: go mod download
 
       - name: Build
