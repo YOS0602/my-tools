@@ -1,17 +1,26 @@
-# 処理シーケンス
+# Sequence
 
 ```mermaid
 sequenceDiagram
-    participant ショートカットアプリ
-    participant プロダクト
+    participant ShortcutApp
+    participant Product
     participant NotionAPI
     participant SlackAPI
-    participant ユーザー
+    participant SlackApp
+    participant User
 
-    ショートカットアプリ ->> プロダクト: APIエンドポイントにリクエスト送信
-    プロダクト ->> NotionAPI: ドキュメントデータ取得リクエスト
-    NotionAPI -->> プロダクト: ドキュメントデータ応答
-    プロダクト ->> SlackAPI: テキストデータ送信リクエスト
-    SlackAPI -->> プロダクト: 送信結果応答
-    ユーザー ->> SlackAPI: Slackを確認
+    ShortcutApp ->> Product: API Endpoint に HTTP Request
+
+    Product ->> NotionAPI: ドキュメントデータ取得リクエスト
+    NotionAPI -->> Product: ドキュメントデータ応答
+
+    Product ->> Product: Slackへのリクエストデータ生成
+
+    Product ->> SlackAPI: テキストデータ送信リクエスト
+    SlackAPI ->> SlackApp: メッセージ
+    SlackAPI -->> Product: 送信結果応答
+    Product -->> ShortcutApp: Response
+
+    SlackApp ->> User: Notification
+    User ->> SlackApp: Slackを確認
 ```
