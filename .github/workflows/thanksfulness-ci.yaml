@@ -6,7 +6,8 @@ name: Thanksfulness CI
 
 on:
   pull_request:
-    types: [opened, reopened, ready_for_review]
+    # About types See https://docs.github.com/ja/webhooks/webhook-events-and-payloads#pull_request
+    types: [opened, reopened, ready_for_review, synchronize]
     paths:
       - 'thanksfulness/**'
       - '!thanksfulness/docs/**'
@@ -32,6 +33,7 @@ jobs:
       - name: Download Go modules
         shell: bash
         if: ${{ steps.setup-go.outputs.cache-hit != 'true' }}
+        working-directory: thanksfulness
         run: go mod download
 
       - name: Build

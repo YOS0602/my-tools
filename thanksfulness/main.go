@@ -9,5 +9,5 @@ func main() {
 			"message": "pong",
 		})
 	})
-	r.Run() // 0.0.0.0:8080 でサーバーを立てます。
+	r.Run() // http://localhost:8080 でサーバーを立てます。
 }
