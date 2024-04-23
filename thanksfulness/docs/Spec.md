@@ -14,7 +14,7 @@ Webhookを使用したメッセージングAPIリファレンスはこちら
 ```json
 {
   "channel": "4-thanksfulness",
-  "username": "Thanksfulness bot",
+  "username": "Thanksfulness",
   "icon_emoji": ":gratitude-thank-you:",
   "attachments": [
     {
@@ -61,7 +61,7 @@ Webhookを使用したメッセージングAPIリファレンスはこちら
                   "elements": [
                     {
                       "type": "text",
-                      "text": "item 2: "
+                      "text": "item 2"
                     }
                   ]
                 },
@@ -70,7 +70,7 @@ Webhookを使用したメッセージングAPIリファレンスはこちら
                   "elements": [
                     {
                       "type": "text",
-                      "text": "item 3: "
+                      "text": "item 3"
                     }
                   ]
                 },
@@ -79,7 +79,7 @@ Webhookを使用したメッセージングAPIリファレンスはこちら
                   "elements": [
                     {
                       "type": "text",
-                      "text": "item 4: "
+                      "text": "item 4"
                     }
                   ]
                 },
@@ -88,11 +88,20 @@ Webhookを使用したメッセージングAPIリファレンスはこちら
                   "elements": [
                     {
                       "type": "text",
-                      "text": "item 5: "
+                      "text": "item 5"
                     }
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "type": "context",
+          "elements": [
+            {
+              "type": "mrkdwn",
+              "text": "Edited on 2024/02/16"
             }
           ]
         }
