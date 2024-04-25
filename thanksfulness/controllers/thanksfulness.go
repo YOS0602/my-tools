@@ -5,6 +5,7 @@ import (
 	"my-tools/thanksfulness/notion"
 
 	"github.com/gin-gonic/gin"
+	"github.com/slack-go/slack"
 )
 
 func Thanksfulness(c *gin.Context) {
@@ -15,6 +16,7 @@ func Thanksfulness(c *gin.Context) {
 	}
 
 	// TODO slack に送信
+	slack.New("YOUR_TOKEN_HERE")
 
 	c.JSON(200, gin.H{
 		"message":    "thanksfulness!",
