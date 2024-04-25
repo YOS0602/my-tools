@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"my-tools/thanksfulness/controllers"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -17,7 +18,8 @@ func main() {
 			"message": "pong",
 		})
 	})
-	r.Run() // http://localhost:8080 でサーバーを立てます。
+	r.POST("/thanksfulness", controllers.Thanksfulness)
+	r.Run() // http://localhost:8080
 }
 
 func loadEnv() {
