@@ -21,7 +21,7 @@ func toTime(dateTime string) time.Time {
 func TestUnmarshalResponse(t *testing.T) {
 	t.Parallel()
 	// given
-	input, err := os.ReadFile("./NotionAPIResponseTestData.json")
+	input, err := os.ReadFile("./unmarshal_NotionAPIResponseTestData.json")
 	if err != nil {
 		t.Errorf("Error reading test data: %v", err)
 	}
