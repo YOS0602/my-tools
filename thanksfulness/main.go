@@ -19,7 +19,7 @@ func main() {
 		})
 	})
 	r.POST("/thanksfulness", controllers.Thanksfulness)
-	r.Run() // http://localhost:8080 でサーバーを立てます。
+	r.Run() // http://localhost:8080
 }
 
 func loadEnv() {
