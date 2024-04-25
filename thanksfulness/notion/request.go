@@ -32,8 +32,10 @@ func GetBlockChildren() ([]byte, error) {
 		return nil, err
 	}
 
-	// TODO status が200以外の時のハンドリング処理
-	// resp.StatusCode
+	if resp.StatusCode != 200 {
+		log.Fatalf("Status Code is not 200, but got %d from Notion api. %v", resp.StatusCode, err)
+		return nil, err
+	}
 
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
