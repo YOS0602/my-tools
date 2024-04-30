@@ -2,7 +2,9 @@ package notion
 
 import "log"
 
-func GetThanksLists() (*ThanksList, error) {
+// usecase ロジック
+// Notion から感謝リストを取得する
+func GetThanksList() (*ThanksList, error) {
 	// NotionAPI から Block 配下のデータを取得
 	data, err := GetBlockChildren()
 	if err != nil {

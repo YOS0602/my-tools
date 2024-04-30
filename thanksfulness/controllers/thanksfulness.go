@@ -3,23 +3,25 @@ package controllers
 import (
 	"log"
 	"my-tools/thanksfulness/notion"
+	"my-tools/thanksfulness/slack"
 
 	"github.com/gin-gonic/gin"
-	"github.com/slack-go/slack"
 )
 
 func Thanksfulness(c *gin.Context) {
-	thanksList, err := notion.GetThanksLists()
+	thanksList, err := notion.GetThanksList()
 	if err != nil {
 		log.Printf("Error during Notion API: %v\n", err)
 		c.AbortWithStatusJSON(500, gin.H{"message": "Notion API Failed!"})
 	}
 
-	// TODO slack に送信
-	slack.New("YOUR_TOKEN_HERE")
+	err = slack.PostThanksList(thanksList)
+	if err != nil {
+		log.Printf("Error during Slack API: %v\n", err)
+		c.AbortWithStatusJSON(500, gin.H{"message": "Slack API Failed!"})
+	}
 
 	c.JSON(200, gin.H{
-		"message":    "thanksfulness!",
-		"thanksList": thanksList, // TODO 動作確認用 あとで消す
+		"message": "thanksfulness!",
 	})
 }
