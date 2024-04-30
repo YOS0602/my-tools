@@ -2,34 +2,26 @@ package notion_test
 
 import (
 	"my-tools/thanksfulness/notion"
-	"os"
-	"reflect"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func toTime(dateTime string) time.Time {
-	t, err := time.Parse(time.RFC3339, dateTime)
-	if err != nil {
-		return time.Now()
-	}
-	return t
-}
-
-func TestUnmarshalResponse(t *testing.T) {
+func TestConvert(t *testing.T) {
 	t.Parallel()
 	// given
-	input, err := os.ReadFile("./unmarshal_NotionAPIResponseTestData.json")
-	if err != nil {
-		t.Errorf("Error reading test data: %v", err)
-	}
+	input := defaultInput()
 	// when
-	actual, error := notion.UnmarshalResponse(input)
+	actual, _ := notion.Convert(input)
 	// then
-	assert.Nil(t, error)
-	expectedResponse := &notion.APIResponse{
+	assert.Equal(t, notion.ThanksList{
+		EditedAt: "2024/01/01",
+		Items:    []string{"ありがとう", "Merci", "謝謝"},
+	}, *actual)
+}
+
+func defaultInput() *notion.APIResponse {
+	return &notion.APIResponse{
 		Object: "list",
 		Results: []notion.APIResult{
 			{
@@ -48,7 +40,7 @@ func TestUnmarshalResponse(t *testing.T) {
 					RichText: []notion.APIPlainText{
 						{
 							Type:      "text",
-							PlainText: "2024/02/01",
+							PlainText: "2024/01/01",
 						},
 					},
 				},
@@ -69,7 +61,15 @@ func TestUnmarshalResponse(t *testing.T) {
 					RichText: []notion.APIPlainText{
 						{
 							Type:      "text",
-							PlainText: "感謝永遠に",
+							PlainText: "ありがとう",
+						},
+						{
+							Type:      "text",
+							PlainText: "Merci",
+						},
+						{
+							Type:      "text",
+							PlainText: "謝謝",
 						},
 					},
 				},
@@ -80,8 +80,5 @@ func TestUnmarshalResponse(t *testing.T) {
 		Type:       "block",
 		Block:      make(map[string]interface{}),
 		RequestId:  "30000000-0000-0000-0000-000011112222",
-	}
-	if !reflect.DeepEqual(actual, expectedResponse) {
-		t.Errorf("Unexpected response: expected %v, got %v", expectedResponse, actual)
 	}
 }
