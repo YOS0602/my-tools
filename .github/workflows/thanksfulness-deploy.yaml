@@ -59,7 +59,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: asia-northeast1-docker.pkg.dev/$GCP_PROJECT/thanksfulness:latest
+          tags: asia-northeast1-docker.pkg.dev/${{ env.GCP_PROJECT }}/thanksfulness:latest
           # builder: ${{ steps.buildx.outputs.name }}
           # cache-from: type=local,src=/tmp/.buildx-cache
           # cache-to: type=local,dest=/tmp/.buildx-cache
