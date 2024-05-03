@@ -11,3 +11,8 @@ module "thanksfulness_ar" {
   source   = "./modules/artifact-registry"
   location = var.region
 }
+
+module "thanksfulness_cicd_sa" {
+  source  = "./modules/service-accounts/"
+  project = var.project
+}
