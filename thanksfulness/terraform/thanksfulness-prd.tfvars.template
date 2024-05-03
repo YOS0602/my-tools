@@ -1,2 +1,5 @@
 project       = ""
 run_image_url = ""
+NOTION_API_KEY = ""
+NOTION_THANKSFULNESS_BLOCK_ID = ""
+SLACK_BOT_USER_OAUTH_TOKEN = ""
