@@ -31,6 +31,7 @@ jobs:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       # See https://github.com/google-github-actions/setup-gcloud?tab=readme-ov-file#setup-gcloud-github-action
+      # TODO 15秒ほどかかるのでキャッシュ使うなどして短時間化したい
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v2'
         with:
@@ -58,6 +59,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v5
         with:
+          context: ./
           push: true
           tags: asia-northeast1-docker.pkg.dev/${{ env.GCP_PROJECT }}/thanksfulness:latest
           # builder: ${{ steps.buildx.outputs.name }}
