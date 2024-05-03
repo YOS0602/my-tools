@@ -13,6 +13,18 @@ resource "google_cloud_run_v2_service" "default" {
     }
     containers {
       image = var.image
+      env {
+        name  = "NOTION_API_KEY"
+        value = var.NOTION_API_KEY
+      }
+      env {
+        name  = "NOTION_THANKSFULNESS_BLOCK_ID"
+        value = var.NOTION_THANKSFULNESS_BLOCK_ID
+      }
+      env {
+        name  = "SLACK_BOT_USER_OAUTH_TOKEN"
+        value = var.SLACK_BOT_USER_OAUTH_TOKEN
+      }
       resources {
         limits = {
           cpu    = "1"
@@ -25,3 +37,4 @@ resource "google_cloud_run_v2_service" "default" {
     max_instance_request_concurrency = 1
   }
 }
+
