@@ -12,6 +12,12 @@ resource "google_project_iam_member" "cicd-account-iam-run-developer" {
   role   = "roles/run.developer"
   member = google_service_account.cicd.member
 }
+resource "google_project_iam_member" "cicd-account-iam-iam-serviceAccountUser" {
+  project = var.project
+  # https://cloud.google.com/run/docs/reference/iam/roles#permissions-required-for-the-deploying-services-revisions
+  role   = "roles/iam.serviceAccountUser"
+  member = google_service_account.cicd.member
+}
 
 resource "google_project_iam_member" "cicd-account-iam-artifactregistry-writer" {
   project = var.project
