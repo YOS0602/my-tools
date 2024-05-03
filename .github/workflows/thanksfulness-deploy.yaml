@@ -62,9 +62,11 @@ jobs:
           # cache-from: type=local,src=/tmp/.buildx-cache
           # cache-to: type=local,dest=/tmp/.buildx-cache
 
-      - name: Echo image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
-
-      # TODO Cloud Run にデプロイ
       - name: Deploy Cloud Run
-        run: pwd
+        run: |
+          gcloud run deploy thanksfulness --async \
+            --image=asia-northeast1-docker.pkg.dev/${{ env.GCP_PROJECT }}/thanksfulness/thanksfulness:latest \
+            --set-env-vars=NOTION_API_KEY=${{ secrets.NOTION_API_KEY }} \
+            --set-env-vars=NOTION_THANKSFULNESS_BLOCK_ID=${{ secrets.NOTION_THANKSFULNESS_BLOCK_ID }} \
+            --set-env-vars=SLACK_BOT_USER_OAUTH_TOKEN=${{ secrets.SLACK_BOT_USER_OAUTH_TOKEN }} \
+            --allow-unauthenticated --region=asia-northeast1
