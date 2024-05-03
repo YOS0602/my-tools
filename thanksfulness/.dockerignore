@@ -1,0 +1,7 @@
+# This project
+.devcontainer
+docs
+terraform
+.env*
+## Built file
+thanksfulness
