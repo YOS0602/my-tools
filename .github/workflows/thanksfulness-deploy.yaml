@@ -1,5 +1,5 @@
 # See: https://github.com/actions/starter-workflows/blob/main/deployments/google-cloudrun-docker.yml
-name: Thanksfulness Deploy Cloud Run
+name: Thanksfulness Deploy
 
 on:
   push:
@@ -17,14 +17,8 @@ jobs:
   build-and-push-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Chackout
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: built-thanksfulness
-          # path: ./ # 保存先 path を指定したい場合に使用する
 
       # FIXME 確認用。あとで消す
       - run: pwd
@@ -36,12 +30,42 @@ jobs:
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Configure Docker client
-        run: gcloud auth configure-docker
+      # See https://github.com/google-github-actions/setup-gcloud?tab=readme-ov-file#setup-gcloud-github-action
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          version: '>= 456.0.0'
 
-      # TODO Dockerfile をもとにイメージをビルド
+      - name: Configure Docker client
+        run: gcloud auth configure-docker asia-northeast1-docker.pkg.dev
+
+      # TODO Dockerfile をもとにDockerイメージをビルド
+      # https://matsuand.github.io/docs.docker.jp.onthefly/language/golang/configure-ci-cd/#optimizing-the-workflow
+      # - name: Set up Docker Buildx
+      #   id: buildx
+      #   uses: docker/setup-buildx-action@v1
+
+      # - name: Cache Docker layers
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: /tmp/.buildx-cache
+      #     key: ${{ runner.os }}-buildx-${{ github.sha }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-buildx-
+
       - name: Build Docker image
-        run: pwd
+        id: docker_build
+        uses: docker/build-push-action@v5
+        with:
+          push: false
+          tags: ${{ github.event.repository.name }}:latest, ${{ github.repository }}:latest
+          # builder: ${{ steps.buildx.outputs.name }}
+          # load: true
+          # cache-from: type=local,src=/tmp/.buildx-cache
+          # cache-to: type=local,dest=/tmp/.buildx-cache
+
+      # - name: Image digest
+      #   run: echo ${{ steps.docker_build.outputs.digest }}
 
       # TODO Artifact Registry に push
       - name: Push Docker image to AR
