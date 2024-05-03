@@ -59,7 +59,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v5
         with:
-          context: ./
+          context: ./thanksfulness
           push: true
           tags: asia-northeast1-docker.pkg.dev/${{ env.GCP_PROJECT }}/thanksfulness:latest
           # builder: ${{ steps.buildx.outputs.name }}
