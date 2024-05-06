@@ -8,6 +8,7 @@ module "thanksfulness_run" {
   NOTION_API_KEY                = var.NOTION_API_KEY
   NOTION_THANKSFULNESS_BLOCK_ID = var.NOTION_THANKSFULNESS_BLOCK_ID
   SLACK_BOT_USER_OAUTH_TOKEN    = var.SLACK_BOT_USER_OAUTH_TOKEN
+  THANKSFULNESS_API_KEY         = var.THANKSFULNESS_API_KEY
 }
 
 module "thanksfulness_ar" {

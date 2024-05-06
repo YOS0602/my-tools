@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"my-tools/thanksfulness/controllers"
+	"my-tools/thanksfulness/lib"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -18,7 +19,7 @@ func main() {
 			"message": "pong",
 		})
 	})
-	r.POST("/thanksfulness", controllers.Thanksfulness)
+	r.POST("/thanksfulness", lib.ApiKeyMiddleware, controllers.Thanksfulness)
 	r.Run() // http://localhost:8080
 }
 

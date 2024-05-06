@@ -30,3 +30,9 @@ variable "SLACK_BOT_USER_OAUTH_TOKEN" {
   sensitive = true
   nullable  = false
 }
+
+variable "THANKSFULNESS_API_KEY" {
+  type      = string
+  sensitive = true
+  nullable  = false
+}
