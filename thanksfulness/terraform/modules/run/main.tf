@@ -25,6 +25,10 @@ resource "google_cloud_run_v2_service" "default" {
         name  = "SLACK_BOT_USER_OAUTH_TOKEN"
         value = var.SLACK_BOT_USER_OAUTH_TOKEN
       }
+      env {
+        name  = "THANKSFULNESS_API_KEY"
+        value = var.THANKSFULNESS_API_KEY
+      }
       resources {
         limits = {
           cpu    = "1"
