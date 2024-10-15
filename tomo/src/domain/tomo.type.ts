@@ -7,7 +7,7 @@
 type Index = number;
 
 // See https://www.factor.ai/survey
-export interface ToMoSurveyAnswer {
+export type ToMoSurveyAnswer = {
   /** 楽しさ */
   play: Index;
   /** 目的 */
@@ -20,4 +20,4 @@ export interface ToMoSurveyAnswer {
   economicPressure: Index;
   /** 惰性 */
   inertia: Index;
-}
+};
