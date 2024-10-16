@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import App from "./App.tsx";
 import "./index.css";
 import "@fontsource/noto-sans-jp/400.css";
+import Container from "@mui/material/Container";
 
 // MUI Component で使用するデフォルトフォントを設定
 const theme = createTheme({
@@ -15,7 +16,9 @@ const theme = createTheme({
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <Container maxWidth="lg">
+        <App />
+      </Container>
     </ThemeProvider>
   </StrictMode>
 );

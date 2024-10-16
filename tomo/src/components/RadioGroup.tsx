@@ -13,6 +13,7 @@ export default function RowRadioButtonsGroup({
 }: RowRadioButtonsGroupProps) {
   return (
     <FormControl>
+      {/* FIXME id や name を正しい値にする */}
       <FormLabel id="demo-row-radio-buttons-group-label">{formLabel}</FormLabel>
       <RadioGroup
         row
@@ -24,42 +25,50 @@ export default function RowRadioButtonsGroup({
           control={<Radio />}
           label="まったく違う"
           labelPlacement="bottom"
+          // TODO スマホサイズの時は24か指定なしにしたい
+          sx={{ "& .MuiSvgIcon-root": { fontSize: 24 } }}
         />
         <FormControlLabel
           value={2}
           control={<Radio />}
           label=""
           labelPlacement="bottom"
+          sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
         />
         <FormControlLabel
           value={3}
           control={<Radio />}
           label=""
           labelPlacement="bottom"
+          sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
         />
         <FormControlLabel
           value={4}
           control={<Radio />}
           label=""
           labelPlacement="bottom"
+          sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
         />
         <FormControlLabel
           value={5}
           control={<Radio />}
           label=""
           labelPlacement="bottom"
+          sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
         />
         <FormControlLabel
           value={6}
           control={<Radio />}
           label=""
           labelPlacement="bottom"
+          sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
         />
         <FormControlLabel
           value={7}
           control={<Radio />}
           label="まったくその通りである"
           labelPlacement="bottom"
+          sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
         />
       </RadioGroup>
     </FormControl>
