@@ -21,3 +21,5 @@ export type ToMoSurveyAnswer = {
   /** 惰性 */
   inertia: Index;
 };
+
+export type MotivationKey = keyof ToMoSurveyAnswer;

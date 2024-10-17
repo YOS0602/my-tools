@@ -1,31 +1,64 @@
-import { FormEventHandler } from "react";
+import {
+  type ChangeEvent,
+  type FormEventHandler,
+  useCallback,
+  useState,
+} from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { tomoQuestions } from "./questions";
-import { ToMoSurveyAnswer } from "./domain/tomo.type";
-import { RowRadioButtonsGroup } from "./components/RadioGroup";
+import { type MotivationKey } from "./domain/tomo.type";
+import {
+  QuestionSection,
+  type QuestionSectionProps,
+} from "./components/QuestionSection";
+
+type ToMoInputData = {
+  [key in MotivationKey]: number;
+};
 
 const App = () => {
-  const onSubmit: FormEventHandler = (event) => {
-    event.preventDefault();
-    console.log(event);
-  };
+  const [inputValue, setInputValue] = useState<ToMoInputData>({
+    play: NaN,
+    purpose: NaN,
+    potential: NaN,
+    emotionalPressure: NaN,
+    economicPressure: NaN,
+    inertia: NaN,
+  });
+
+  // useCallback しないと、ラジオを選択する度に再描画されて設問順序が入れ替わる
+  const getHandleRadioChangeFn: QuestionSectionProps["curriedOnChangeFn"] =
+    useCallback(
+      (motivationKey: MotivationKey) =>
+        (_: ChangeEvent<HTMLInputElement>, value: string) => {
+          setInputValue((previous) => ({
+            ...previous,
+            [motivationKey]: Number(value),
+          }));
+        },
+      []
+    );
+
+  /**
+   * 診断するボタンを押した際の処理
+   * ToMoを計算して表示する
+   */
+  const handleSubmit: FormEventHandler = useCallback(
+    (event) => {
+      event.preventDefault();
+      console.log(inputValue);
+    },
+    [inputValue]
+  );
 
   return (
     <Box>
-      <form onSubmit={onSubmit}>
-        {Object.keys(tomoQuestions)
-          .toSorted(() => Math.random() - 0.5) // 考案者が本に書いた通り、質問文をランダムな順序で表示する
-          .map((q, i) => {
-            const question = q as keyof ToMoSurveyAnswer;
-            return (
-              <Box key={i} sx={{ marginBottom: "48px" }}>
-                <RowRadioButtonsGroup
-                  formLabel={tomoQuestions[question].text}
-                />
-              </Box>
-            );
-          })}
+      <form onSubmit={handleSubmit}>
+        <QuestionSection
+          tomoQuestions={tomoQuestions}
+          curriedOnChangeFn={getHandleRadioChangeFn}
+        />
 
         <Box sx={{ textAlign: "center" }}>
           <Button variant="contained" size="large" type="submit">

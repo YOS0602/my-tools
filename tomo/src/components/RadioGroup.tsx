@@ -7,70 +7,69 @@ import FormControl from "@mui/material/FormControl";
 
 type RowRadioButtonsGroupProps = {
   formLabel: string;
+  onChangeFn: RadioGroupOnChangeFn;
 };
 
+export type RadioGroupOnChangeFn = (
+  event: React.ChangeEvent<HTMLInputElement>,
+  value: string
+) => void;
+
 export const RowRadioButtonsGroup = memo(
-  ({ formLabel }: RowRadioButtonsGroupProps) => {
+  ({ formLabel, onChangeFn }: RowRadioButtonsGroupProps) => {
     return (
       <FormControl>
-        {/* FIXME id や name を正しい値にする */}
-        <FormLabel id="demo-row-radio-buttons-group-label">
-          {formLabel}
-        </FormLabel>
-        <RadioGroup
-          row
-          aria-labelledby="demo-row-radio-buttons-group-label"
-          name="row-radio-buttons-group"
-        >
+        <FormLabel>{formLabel}</FormLabel>
+        <RadioGroup row onChange={onChangeFn}>
           <FormControlLabel
-            value={1}
+            value={"1"}
             control={<Radio />}
             label="まったく違う"
             labelPlacement="bottom"
             // TODO スマホサイズの時は24か指定なしにしたい
-            sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
+            sx={{ "& .MuiSvgIcon-root": { fontSize: 48 } }}
           />
           <FormControlLabel
-            value={2}
+            value={"2"}
             control={<Radio />}
             label=""
             labelPlacement="bottom"
-            sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
+            sx={{ "& .MuiSvgIcon-root": { fontSize: 48 } }}
           />
           <FormControlLabel
-            value={3}
+            value={"3"}
             control={<Radio />}
             label=""
             labelPlacement="bottom"
-            sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
+            sx={{ "& .MuiSvgIcon-root": { fontSize: 48 } }}
           />
           <FormControlLabel
-            value={4}
+            value={"4"}
             control={<Radio />}
             label=""
             labelPlacement="bottom"
-            sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
+            sx={{ "& .MuiSvgIcon-root": { fontSize: 48 } }}
           />
           <FormControlLabel
-            value={5}
+            value={"5"}
             control={<Radio />}
             label=""
             labelPlacement="bottom"
-            sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
+            sx={{ "& .MuiSvgIcon-root": { fontSize: 48 } }}
           />
           <FormControlLabel
-            value={6}
+            value={"6"}
             control={<Radio />}
             label=""
             labelPlacement="bottom"
-            sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
+            sx={{ "& .MuiSvgIcon-root": { fontSize: 48 } }}
           />
           <FormControlLabel
-            value={7}
+            value={"7"}
             control={<Radio />}
             label="まったくその通りである"
             labelPlacement="bottom"
-            sx={{ "& .MuiSvgIcon-root": { fontSize: 64 } }}
+            sx={{ "& .MuiSvgIcon-root": { fontSize: 48 } }}
           />
         </RadioGroup>
       </FormControl>

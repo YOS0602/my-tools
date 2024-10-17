@@ -1,8 +1,8 @@
 import { ToMoSurveyAnswer } from "./domain/tomo.type";
 
-type ToMoQuestion = {
-  [key in keyof ToMoSurveyAnswer]: {
-    text: string;
+export type ToMoQuestion = {
+  readonly [key in keyof ToMoSurveyAnswer]: {
+    readonly text: string;
   };
 };
 
