@@ -1,4 +1,4 @@
-import { ToMoSurveyAnswer } from "./domain/tomo.type";
+import { ToMoSurveyAnswer } from "./tomo.type";
 
 export type ToMoQuestion = {
   readonly [key in keyof ToMoSurveyAnswer]: {

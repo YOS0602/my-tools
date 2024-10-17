@@ -6,8 +6,8 @@ import {
 } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { tomoQuestions } from "./questions";
-import { type MotivationKey } from "./domain/tomo.type";
+import { tomoQuestions } from "./libs/tomoQuestions";
+import { type MotivationKey } from "./libs/tomo.type";
 import {
   QuestionSection,
   type QuestionSectionProps,

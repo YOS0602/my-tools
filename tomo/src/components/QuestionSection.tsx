@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { memo } from "react";
-import { type MotivationKey } from "../domain/tomo.type";
-import { type ToMoQuestion } from "../questions";
+import { type MotivationKey } from "../libs/tomo.type";
+import { type ToMoQuestion } from "../libs/tomoQuestions";
 import { type RadioGroupOnChangeFn, RowRadioButtonsGroup } from "./RadioGroup";
 
 export type QuestionSectionProps = {

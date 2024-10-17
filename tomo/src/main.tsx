@@ -1,10 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Container from "@mui/material/Container";
 import App from "./App.tsx";
 import "./index.css";
 import "@fontsource/noto-sans-jp/400.css";
-import Container from "@mui/material/Container";
 
 // MUI Component で使用するデフォルトフォントを設定
 const theme = createTheme({
