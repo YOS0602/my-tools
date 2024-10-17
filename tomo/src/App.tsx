@@ -7,18 +7,15 @@ import {
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { tomoQuestions } from "./libs/tomoQuestions";
-import { type MotivationKey } from "./libs/tomo.type";
+import { ToMoSurveyAnswer, type MotivationKey } from "./libs/tomo.type";
+import { calculateToMo } from "./libs/tomoCalculator";
 import {
   QuestionSection,
   type QuestionSectionProps,
 } from "./components/QuestionSection";
 
-type ToMoInputData = {
-  [key in MotivationKey]: number;
-};
-
 const App = () => {
-  const [inputValue, setInputValue] = useState<ToMoInputData>({
+  const [inputValue, setInputValue] = useState<ToMoSurveyAnswer>({
     play: NaN,
     purpose: NaN,
     potential: NaN,
@@ -47,7 +44,8 @@ const App = () => {
   const handleSubmit: FormEventHandler = useCallback(
     (event) => {
       event.preventDefault();
-      console.log(inputValue);
+      const tomoScore = calculateToMo(inputValue);
+      alert(`あなたのToMo指数は...... ${tomoScore}点です！`);
     },
     [inputValue]
   );
