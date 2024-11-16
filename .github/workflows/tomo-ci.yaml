@@ -1,4 +1,4 @@
-name: Deploy to Firebase Hosting on PR
+name: ToMo CI
 on:
   pull_request:
     paths:
