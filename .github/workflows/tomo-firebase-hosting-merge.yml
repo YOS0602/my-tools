@@ -32,3 +32,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOMO_THALASSA_PRD }}
           channelId: live
           projectId: tomo-thalassa-prd
+          entryPoint: ./tomo
