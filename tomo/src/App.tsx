@@ -39,7 +39,7 @@ const App = () => {
 
   /**
    * 診断するボタンを押した際の処理
-   * ToMoを計算して表示する
+   * ToMoを計算して表示する。
    */
   const handleSubmit: FormEventHandler = useCallback(
     (event) => {
