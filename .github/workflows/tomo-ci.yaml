@@ -7,7 +7,7 @@ on:
 
 defaults:
   run:
-    working-directory: ./tomo
+    working-directory: tomo
 
 jobs:
   ci:
@@ -16,9 +16,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: "package.json"
+          node-version-file: "tomo/package.json"
           cache: "npm"
-          cache-dependency-path: "package-lock.json"
+          cache-dependency-path: "tomo/package-lock.json"
       - run: npm ci
       - name: Lint
         run: npm run lint
