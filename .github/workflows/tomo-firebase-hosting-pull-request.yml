@@ -10,7 +10,7 @@ on:
 
 defaults:
   run:
-    working-directory: tomo
+    working-directory: ./tomo
 
 permissions:
   checks: write

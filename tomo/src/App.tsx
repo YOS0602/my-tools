@@ -24,7 +24,7 @@ const App = () => {
     inertia: NaN,
   });
 
-  // useCallback しないと、ラジオを選択する度に再描画されて設問順序が入れ替わる
+  // useCallback しないと、ラジオを選択する度に再描画されて設問順序が入れ替わる。
   const getHandleRadioChangeFn: QuestionSectionProps["curriedOnChangeFn"] =
     useCallback(
       (motivationKey: MotivationKey) =>
