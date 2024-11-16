@@ -4,7 +4,10 @@ name: Thanksfulness Deploy
 on:
   push:
     branches:
-      - 'main'
+      - "main"
+    paths:
+      - "thanksfulness/**"
+      - "!thanksfulness/docs/**"
   workflow_dispatch:
 
 defaults:
@@ -21,16 +24,16 @@ jobs:
 
       # See https://github.com/google-github-actions/auth
       - name: Authenticate with Google Cloud
-        uses: 'google-github-actions/auth@v2'
+        uses: "google-github-actions/auth@v2"
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       # See https://github.com/google-github-actions/setup-gcloud?tab=readme-ov-file#setup-gcloud-github-action
       # TODO 15秒ほどかかるのでキャッシュ使うなどして短時間化したい
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
         with:
-          version: '>= 456.0.0'
+          version: ">= 456.0.0"
 
       - name: Configure Docker client
         run: gcloud auth configure-docker asia-northeast1-docker.pkg.dev

@@ -1,0 +1,28 @@
+name: Deploy to Firebase Hosting on PR
+on:
+  pull_request:
+    paths:
+      - "tomo/**"
+      - "!tomo/docs/**"
+
+defaults:
+  run:
+    working-directory: tomo
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: "package.json"
+          cache: "npm"
+          cache-dependency-path: "package-lock.json"
+      - run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build
+      - name: Vitest
+        run: npm run test
