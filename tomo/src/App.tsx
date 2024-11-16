@@ -44,8 +44,16 @@ const App = () => {
   const handleSubmit: FormEventHandler = useCallback(
     (event) => {
       event.preventDefault();
+
+      // TODO バリデーションしてNaNが一つでもあったら入力を促す
+      // それか初期値として「4」を選択させてstateにもsetしておく？
       const tomoScore = calculateToMo(inputValue);
-      alert(`あなたのToMo指数は...... ${tomoScore}点です！`);
+      // TODO alertではなくModalなどを使って表示する
+      alert(
+        tomoScore
+          ? `あなたのToMo指数は...... ${tomoScore}点です！`
+          : "ToMo指数の計算に失敗しました！"
+      );
     },
     [inputValue]
   );
