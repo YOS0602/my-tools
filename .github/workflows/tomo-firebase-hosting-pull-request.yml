@@ -25,9 +25,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: "package.json"
+          node-version-file: "tomo/package.json"
           cache: "npm"
-          cache-dependency-path: "package-lock.json"
+          cache-dependency-path: "tomo/package-lock.json"
       - run: npm ci
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
@@ -36,3 +36,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOMO_THALASSA_PRD }}
           expires: 1d
           projectId: tomo-thalassa-prd
+          entryPoint: ./tomo
