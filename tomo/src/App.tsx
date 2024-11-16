@@ -45,7 +45,7 @@ const App = () => {
     (event) => {
       event.preventDefault();
 
-      // TODO バリデーションしてNaNが一つでもあったら入力を促す
+      // TODO バリデーションして NaN が一つでもあったら入力を促すメッセージを表示する
       // それか初期値として「4」を選択させてstateにもsetしておく？
       const tomoScore = calculateToMo(inputValue);
       // TODO alertではなくModalなどを使って表示する
