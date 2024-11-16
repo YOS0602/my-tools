@@ -50,9 +50,9 @@ const App = () => {
       const tomoScore = calculateToMo(inputValue);
       // TODO alertではなくModalなどを使って表示する
       alert(
-        tomoScore
-          ? `あなたのToMo指数は...... ${tomoScore}点です！`
-          : "ToMo指数の計算に失敗しました！"
+        isNaN(tomoScore)
+          ? "ToMo指数の計算に失敗しました！"
+          : `あなたのToMo指数は...... ${tomoScore}点です！`
       );
     },
     [inputValue]
